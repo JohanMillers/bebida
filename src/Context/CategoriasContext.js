@@ -1,4 +1,5 @@
-import React ,{createContext, useState} from 'react';
+import axios from 'axios';
+import React ,{createContext, useState, useEffect} from 'react';
 
 //Crear Context
 export const CategoríasContext = createContext();
@@ -9,15 +10,27 @@ const CategoriaProvider = (props) => {
 
     //crear el state del context
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [Hola, guardarHola] = useState('hola desde state');
+    const [categorias, SetCategoria] = useState([]);
 
+    //ejecutar el llamdo a la api
+    useEffect(() => {
+        const obtenerCategorias = async () => {
+            const Url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
+            const categorias = await axios.get(Url);
+
+            SetCategoria(categorias.data.drinks);
+            
+        }
+        obtenerCategorias();
+
+    }, [])
 
     return (
         <CategoríasContext.Provider
               value={{
-                  Hola,
-                  guardarHola
+                  categorias
+                  
               }}
         >
 
