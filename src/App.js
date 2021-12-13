@@ -5,10 +5,12 @@ import Header from './Components/Header';
 import Formulario from './Components/Formulario';
 
 import CategoriaProvider from './Context/CategoriasContext';
+import RecetasProvider from './Context/RecetasContex';
 
 function App() {
   return (
     <CategoriaProvider>
+      <RecetasProvider>
       <Header/>
 
       <div className="container mt-5">
@@ -17,6 +19,7 @@ function App() {
 
         </div>
       </div>
+      </RecetasProvider>
     </CategoriaProvider>
   );
 }
