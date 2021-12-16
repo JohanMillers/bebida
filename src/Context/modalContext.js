@@ -20,7 +20,7 @@ const ModalProvider = (props) => {
 
             const resultado = await axios.get(url);
 
-            console.log(resultado.data.drinks[0]);
+            setInformacion(resultado.data.drinks[0]);
 
             
 
