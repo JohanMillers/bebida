@@ -51,19 +51,36 @@ const Receta = ({receta}) => {
     const handleClose = () => {
         setOpen(false);
     }
+    // Configuración del modal de material-ui
 
 
 
    //Extraer los valores del context
-    const {setIdreceta} = useContext(ModalContext);
+    const { informacion, setIdreceta,setInformacion} = useContext(ModalContext);
     //Extraer los valores del context
+    
+
+    //Muestra y formatear los ingredinetes
+
+    const mostrarIngredientes = informacion => {
+        let ingredinetes = [];
+        for (let i = 1; i < 16; i++) {
+            if( informacion[`strIngredient${i}`] ) {
+                ingredinetes.push(
+                    <li>{informacion[`strIngredient${i}`]} {informacion[`strMeasure${i}`]}</li>
+                )
+            }
+        }
+         return ingredinetes;
+    }
+    //Muestra y formatear los ingredinetes
 
     return ( 
         <div className='col-md-4 mb-3'>
-            <div className='card'>
+            <div className='card rounded'>
                 <h4 className="card-header text-center"> {receta.strDrink} </h4>
 
-                <img className='card-img-top' src={receta.strDrinkThumb} alt={`Imagen de ${receta.strDrink}`} />
+                <img className='card-img-top rounded' src={receta.strDrinkThumb} alt={`Imagen de ${receta.strDrink}`} />
 
                 <div className='card-body d-flex justify-content-center'>
                     <button
@@ -80,12 +97,28 @@ const Receta = ({receta}) => {
                     <Modal
                        open={open}
                        onClose={() => {
+                           setIdreceta(null);
+                           setInformacion({});
                            handleClose();
                        }}
                     
                     >
                         <div style={modalStyle} className={classes.paper} >
-                            <h1>Desde Modal</h1>
+                            <h2 className='text-center'>{informacion.strDrink}</h2>
+
+                            <h3>Ingredientes y cantidades</h3>
+
+                            <ul>
+                                {mostrarIngredientes(informacion)}
+                            </ul>
+
+                            <img className="img-fluid my-3" src={informacion.strDrinkThumb} alt={informacion.strDrink} />
+
+                            <h3 className='mt-4'>Instrucciones</h3>
+                            <p>
+                                {informacion.strInstructions}
+                            </p>
+
                         </div>
                     </Modal>
                 </div>

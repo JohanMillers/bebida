@@ -8,7 +8,7 @@ const Formulario = () => {
     const [busqueda, SetBusqueda] = useState({
 
         nombre: '',
-        categoria: ''
+        categoria: 'Ordinary Drink'
     })
     const {categorias} = useContext(CategoríasContext);
     const {setBuscarRecetas, setConsultar} = useContext(RecetasContext);
