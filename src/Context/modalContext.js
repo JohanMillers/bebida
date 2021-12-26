@@ -37,8 +37,10 @@ const ModalProvider = (props) => {
         <ModalContext.Provider
           
            value={{
+            informacion,
+            setIdreceta,
+            setInformacion
 
-            setIdreceta
 
            }}
         

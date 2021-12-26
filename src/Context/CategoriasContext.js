@@ -24,7 +24,8 @@ const CategoriaProvider = (props) => {
         }
         obtenerCategorias();
 
-    }, [])
+    }, [categorias])
+    //Provider es donde se encuentra la funciones  y state
 
     return (
         <CategoríasContext.Provider
